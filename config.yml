@@ -8,3 +8,6 @@ url: "https://Retroflowing.github.io"
 theme: minima
 remote_theme: jekyll/minima
 future: true
+header_pages:
+  - index.md
+  - projects.md
