@@ -1,10 +1,10 @@
 ---
 layout: home
-title: Home
 ---
 
-# Welcome to my Portfolio
-Transitioning from **Lead Line Cook** to **Cybersecurity professional**.
+Welcome to my portfolio! Documenting my transition from **Lead Line Cook** at Via Italian Table to **Cybersecurity Professional**.
 
-## Daily Cyber Intel & Labs
-Below, you'll find my latest project updates and daily threat intelligence.
+### Latest Posts
+{% for post in site.posts %}
+* [{{ post.title }}]({{ post.url }}) - {{ post.date | date_to_string }}
+{% endfor %}
