@@ -27,11 +27,18 @@ jobs:
               "parts":[{
                 "text": "Write a professional Jekyll blog post about today top 3 cybersecurity news stories. Focus on impact and mitigation. Include Front Matter with layout: post, title, and date. Output ONLY markdown."
               }]
-            }]
+            }],
+            "safetySettings": [
+              {
+                "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                "threshold": "BLOCK_NONE"
+              }
+            ]
           }' > response.json
           
+          cat response.json
+          
           python3 -c "import json; r = json.load(open('response.json')); print(r['candidates'][0]['content']['parts'][0]['text'])" > "_posts/$(date +%Y-%m-%d)-daily-intel.md"
-
       - name: Commit and Push
         run: |
           git config --global user.name "CyberNewsBot"
