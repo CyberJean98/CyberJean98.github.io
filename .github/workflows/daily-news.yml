@@ -15,7 +15,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           # 1. Fetch the news
-          curl -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=$GEMINI_API_KEY" \
+          curl -s -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=$GEMINI_API_KEY" \
           -H 'Content-Type: application/json' \
           -d '{
             "contents": [{
@@ -25,10 +25,8 @@ jobs:
             }]
           }' > response.json
 
-          # 2. Check for errors and extract text
-          if grep -q "error" response.json; then
-            echo "API Error Detected:"
-            cat response.json
+          # 2. Smart Parsing (No False Positives)
+          python3 -c "import json, sys; data = json.load(open('response.json')); sys.exit(1) if 'error' in data else print(data['candidates'][0]['content']['parts'][0]['text'])" > _posts/$(date +%Y-%m-%d)-daily-intel.md
             exit 1
           else
             python3 -c "import json; r = json.load(open('response.json')); print(r['candidates'][0]['content']['parts'][0]['text'])" > _posts/$(date +%Y-%m-%d)-daily-intel.md
