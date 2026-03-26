@@ -20,12 +20,14 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          TODAY=$(date +%Y-%m-%d)
           curl -s -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=$GEMINI_API_KEY" \
           -H 'Content-Type: application/json' \
           -d '{
             "contents": [{
               "parts":[{
-                "text": "Write a professional Jekyll blog post about today's top 3 cybersecurity stories. You MUST start the file with '---'. In the front matter, use layout: post, title: 'Cyber Intelligence Report', and date: $(date +%Y-%m-%d). Close the front matter with '---' and then write the content. Output ONLY raw text."
+                "text": "Write a professional Jekyll blog post about today top 3 cybersecurity news stories. Focus on impact and mitigation. You MUST NOT wrap your response in markdown code blocks. The very first line of your output MUST be exactly --- to start the front matter. Include layout: post, title, and date: '"$TODAY"'. Output ONLY the raw text."
+              }]
             }],
             "safetySettings": [
               {
@@ -35,13 +37,4 @@ jobs:
             ]
           }' > response.json
           
-          python3 -c "import json; r = json.load(open('response.json')); print(r['candidates'][0]['content']['parts'][0]['text'])" > "_posts/$(date +%Y-%m-%d)-daily-intel.md"
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name "CyberNewsBot"
-          git config --global user.email "bot@retroflowing.com"
-          git add _posts/*.md
-          git commit -m "Automated Daily Threat Intel" || echo "No changes to commit"
-          git pull origin main -X ours --no-edit
-          git push origin main
+          python3 -c "import json; r = json.load(open('response.json')); print(r['candidates'][0]['content']['parts'][0]['text'])" > "_posts/${TODAY}-daily-intel.md"
