@@ -1,8 +1,9 @@
 name: Daily Cyber News Agent
+
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *'  # Runs at 00:00
 
 permissions:
   contents: write
@@ -21,12 +22,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           TODAY=$(date +%Y-%m-%d)
-          
+
           cat <<EOF > payload.json
           {
             "contents": [{
               "parts":[{
-                "text": "Write a professional Jekyll blog post about today top 3 cybersecurity news stories. Focus on impact and mitigation. You MUST NOT wrap your response in markdown code blocks. The very first line of your output MUST be exactly --- to start the front matter. Include layout: post, title, and date: $TODAY. Output ONLY the raw text."
+                "text": "Write a professional Jekyll blog post about today's top 3 cybersecurity news stories. Focus on impact and mitigation. You MUST follow these rules exactly:\n1. Do NOT wrap your response in markdown code blocks.\n2. Start the response with the frontmatter below and nothing before it.\n3. The title MUST be wrapped in double quotes.\n4. Use exactly this frontmatter format:\n---\nlayout: post\ntitle: \"Your Title Here\"\ndate: ${TODAY}\n---\nThen write the full blog post content after the frontmatter."
               }]
             }],
             "safetySettings": [
@@ -37,12 +38,39 @@ jobs:
             ]
           }
           EOF
-          
+
           curl -s -X POST "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=$GEMINI_API_KEY" \
-          -H "Content-Type: application/json" \
-          -d @payload.json > response.json
-          
-          python3 -c "import json; r = json.load(open('response.json')); print(r['candidates'][0]['content']['parts'][0]['text'])" > "_posts/${TODAY}-daily-intel.md"
+            -H "Content-Type: application/json" \
+            -d @payload.json > response.json
+
+      - name: Parse and Save Post
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+
+          python3 -c "
+          import json, re
+
+          with open('response.json') as f:
+              r = json.load(f)
+
+          content = r['candidates'][0]['content']['parts'][0]['text']
+
+          # Strip any markdown code fences if Gemini added them anyway
+          content = re.sub(r'^\`\`\`.*?\n', '', content, flags=re.MULTILINE)
+          content = re.sub(r'\`\`\`$', '', content, flags=re.MULTILINE)
+          content = content.strip()
+
+          # Fix unquoted titles containing colons
+          content = re.sub(
+              r'^title: (?![\"\'`])(.+)$',
+              lambda m: 'title: \"' + m.group(1).strip() + '\"',
+              content,
+              flags=re.MULTILINE
+          )
+
+          with open('_posts/${TODAY}-daily-intel.md', 'w') as f:
+              f.write(content)
+          "
 
       - name: Commit and Push
         run: |
