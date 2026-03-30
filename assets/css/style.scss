@@ -1,57 +1,233 @@
 ---
 ---
 
-/* =========================================
-   SOC ANALYST DASHBOARD THEME
-   ========================================= */
+/* ========================================
+   CYBERJEAN - DARK TERMINAL THEME
+   ======================================== */
 
+/* === BASE === */
 body {
-    background-color: #0b0f19 !important; /* Deep SOC Blue/Black */
-    color: #c9d1d9 !important; /* Clean, readable gray text */
-    font-family: system-ui, -apple-system, sans-serif !important;
-    line-height: 1.6 !important;
-    padding: 20px;
+  background-color: #0d0f14 !important;
+  color: #c9d1d9 !important;
+  font-family: "Consolas", "Courier New", monospace !important;
+  line-height: 1.7 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* Terminal Green Headers */
+/* === NAVIGATION === */
+.site-header {
+  background-color: #111318 !important;
+  border-bottom: 1px solid #00ff9025 !important;
+  padding: 12px 24px !important;
+}
+
+.site-title {
+  color: #00ff90 !important;
+  font-family: "Consolas", monospace !important;
+  font-size: 18px !important;
+  letter-spacing: 1px !important;
+}
+
+.site-title::before {
+  content: "> ";
+  color: #ffffff40;
+}
+
+.site-nav .page-link {
+  color: #ffffff60 !important;
+  font-size: 13px !important;
+  letter-spacing: 1px !important;
+  margin-left: 20px !important;
+  transition: color 0.2s !important;
+}
+
+.site-nav .page-link:hover {
+  color: #00ff90 !important;
+  text-decoration: none !important;
+}
+
+/* === HEADINGS === */
 h1, h2, h3, h4, h5, h6 {
-    color: #00ff41 !important;
-    font-family: "Consolas", "Courier New", monospace !important;
-    border-bottom: 1px solid #1f2937 !important;
-    padding-bottom: 8px !important;
-    margin-top: 1.5em !important;
+  color: #00ff90 !important;
+  font-family: "Consolas", "Courier New", monospace !important;
+  border-bottom: 1px solid #00ff9020 !important;
+  padding-bottom: 8px !important;
+  margin-top: 1.5em !important;
 }
 
-/* Neon Blue Links */
+h1::before { content: "# "; color: #ffffff30; }
+h2::before { content: "## "; color: #ffffff30; }
+h3::before { content: "### "; color: #ffffff30; }
+
+/* === LINKS === */
 a {
-    color: #58a6ff !important;
-    text-decoration: none !important;
-    transition: all 0.2s ease-in-out;
+  color: #58a6ff !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out !important;
 }
 
 a:hover {
-    color: #79c0ff !important;
-    text-decoration: underline !important;
-    text-shadow: 0 0 8px rgba(88, 166, 255, 0.6) !important;
+  color: #00ff90 !important;
+  text-decoration: underline !important;
 }
 
-/* Code Blocks & Threat Intel Data */
+/* === MAIN WRAPPER === */
+.site-content, .page-content {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 32px 24px !important;
+}
+
+/* === POST LIST (HOME PAGE) === */
+.post-list {
+  list-style: none !important;
+  padding: 0 !important;
+}
+
+.post-list li {
+  background: #111318 !important;
+  border: 0.5px solid #00ff9020 !important;
+  border-left: 3px solid #00ff90 !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 16px 20px !important;
+  margin-bottom: 16px !important;
+  transition: border-color 0.2s !important;
+}
+
+.post-list li:hover {
+  border-left-color: #58a6ff !important;
+  background: #ffffff04 !important;
+}
+
+.post-meta {
+  color: #ffffff40 !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+}
+
+.post-link {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  display: block !important;
+  margin-top: 4px !important;
+}
+
+/* === POST PAGE === */
+.post-header {
+  border-bottom: 1px solid #00ff9020 !important;
+  margin-bottom: 24px !important;
+  padding-bottom: 16px !important;
+}
+
+.post-title {
+  font-size: 24px !important;
+  line-height: 1.3 !important;
+}
+
+.post-content {
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+}
+
+/* === CODE BLOCKS === */
 code, pre {
-    background-color: #010409 !important;
-    color: #00ff41 !important;
-    border: 1px solid #30363d !important;
-    border-radius: 6px !important;
-    padding: 4px 8px !important;
-    font-family: "Consolas", "Courier New", monospace !important;
+  background-color: #010409 !important;
+  color: #00ff41 !important;
+  border: 1px solid #30363d !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-family: "Consolas", "Courier New", monospace !important;
 }
 
-/* Styling lists to look like telemetry alerts */
+pre {
+  padding: 16px !important;
+  overflow-x: auto !important;
+}
+
+pre code {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* === LISTS === */
 li {
-    margin-bottom: 12px !important;
+  margin-bottom: 10px !important;
 }
 
-/* Main content wrapper */
-.wrapper, .container {
-    max-width: 900px !important;
-    margin: 0 auto !important;
+ul li::marker {
+  color: #00ff90 !important;
 }
+
+/* === BLOCKQUOTES === */
+blockquote {
+  border-left: 3px solid #00ff90 !important;
+  background: #00ff9008 !important;
+  padding: 12px 16px !important;
+  margin: 16px 0 !important;
+  color: #ffffff80 !important;
+  border-radius: 0 6px 6px 0 !important;
+}
+
+/* === TAGS / BADGES === */
+.tag {
+  display: inline-block !important;
+  background: #00ff9015 !important;
+  color: #00ff9090 !important;
+  font-size: 11px !important;
+  padding: 2px 10px !important;
+  border-radius: 4px !important;
+  margin-right: 6px !important;
+  letter-spacing: 1px !important;
+}
+
+.tag-critical { background: #ff000020 !important; color: #ff6b6b !important; }
+.tag-high     { background: #f59e0b20 !important; color: #f59e0b !important; }
+.tag-medium   { background: #58a6ff20 !important; color: #58a6ff !important; }
+
+/* === FOOTER === */
+.site-footer {
+  background: #111318 !important;
+  border-top: 1px solid #00ff9015 !important;
+  color: #ffffff30 !important;
+  font-size: 12px !important;
+  padding: 16px 24px !important;
+  text-align: center !important;
+}
+
+.site-footer a {
+  color: #00ff9060 !important;
+}
+
+/* === SECTION CARDS (for projects, certs, about) === */
+.card {
+  background: #111318 !important;
+  border: 0.5px solid #ffffff12 !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  margin-bottom: 16px !important;
+}
+
+.card h3 {
+  border-bottom: none !important;
+  margin-top: 0 !important;
+  font-size: 15px !important;
+}
+
+.card p {
+  color: #ffffff60 !important;
+  font-size: 13px !important;
+  margin: 6px 0 0 !important;
+}
+
+/* === STATUS BADGES === */
+.status-active   { color: #00ff90 !important; font-size: 11px !important; }
+.status-building { color: #f59e0b !important; font-size: 11px !important; }
+.status-planned  { color: #58a6ff !important; font-size: 11px !important; }
+.status-done     { color: #ffffff50 !important; font-size: 11px !important; }
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0d0f14; }
+::-webkit-scrollbar-thumb { background: #00ff9040; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00ff90; }
