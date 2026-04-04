@@ -30,7 +30,27 @@ permalink: /certs/
     <a href="/assets/certs/Datacom-Forage-2026.pdf" target="_blank">View Certificate PDF</a>
   </div>
 </div>
-
+<div class="cert-card-full">
+  <div class="cert-card-header">
+    <div>
+      <div class="cert-name-lg">Deloitte Australia Cyber Job Simulation</div>
+      <div class="cert-provider-lg">Deloitte / Forage — March 20th, 2026</div>
+    </div>
+    <span class="status-done">[completed]</span>
+  </div>
+  <p>Virtual job simulation focused on cybersecurity work at Deloitte Australia. Completed practical tasks involving reading web activity logs, supported a client through a cybersecurity breach investigation, and answered questions to identify suspicious user activity.</p>
+  <div class="card-tags">
+    <span class="tag">Forage</span>
+    <span class="tag">Deloitte</span>
+    <span class="tag">Log Analysis</span>
+    <span class="tag">Web Security</span>
+    <span class="tag">Incident Response</span>
+  </div>
+  <div class="cert-verify">
+    <span class="verify-label">> verify:</span>
+    <a href="/assets/certs/Deloitte-Forage-2026.pdf" target="_blank">View Certificate PDF</a>
+  </div>
+</div>
 <div class="cert-card-full">
   <div class="cert-card-header">
     <div>
