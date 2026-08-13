@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
       - name: Ask Gemini for News
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
