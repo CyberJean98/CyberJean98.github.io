@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: soc-ticketing-api
+    runtime: python
+    plan: free
+    rootDir: ticketing-backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WAZUH_WEBHOOK_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: soc-ticketing-db
+          property: connectionString
+
+databases:
+  - name: soc-ticketing-db
+    plan: free

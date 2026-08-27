@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SOC Ticketing Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12161C;
+    --panel: #1B212A;
+    --panel-raised: #222A35;
+    --border: #2E3846;
+    --text: #E6EAF0;
+    --text-muted: #8B96A6;
+    --accent: #E8A33D;
+    --accent-dim: #6B5527;
+    --crit: #D14D4D;
+    --high: #E8A33D;
+    --med: #4FA3D1;
+    --low: #5FAE7A;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+  a { color: var(--accent); }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .brand-mark {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    border: 1px solid var(--accent-dim);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .brand-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .session-info {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    background: var(--panel-raised);
+    color: var(--text);
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1A1300;
+    font-weight: 600;
+  }
+  .btn-primary:hover { border-color: var(--accent); filter: brightness(1.08); }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 28px; }
+  .hidden { display: none !important; }
+
+  /* ---------- Auth screen ---------- */
+  .auth-shell {
+    max-width: 380px;
+    margin: 10vh auto 0;
+    padding: 32px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .auth-shell h1 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    margin: 0 0 4px;
+  }
+  .auth-shell p.sub {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0 0 24px;
+  }
+  label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .auth-toggle {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 16px;
+  }
+  .auth-toggle button {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .error-msg {
+    background: rgba(209,77,77,0.12);
+    border: 1px solid var(--crit);
+    color: #F0AFAF;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  /* ---------- Dashboard ---------- */
+  .board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .board-header h2 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    margin: 0;
+  }
+  .filters { display: flex; gap: 8px; }
+  select {
+    background: var(--panel-raised);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .ticket-row {
+    display: grid;
+    grid-template-columns: 88px 1fr 100px 110px 140px;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .ticket-row:hover { border-color: var(--accent-dim); }
+  .ticket-row:focus-visible { outline: 2px solid var(--accent); }
+  .ticket-id {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .ticket-title {
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ticket-source {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .sev-critical { background: rgba(209,77,77,0.15); color: var(--crit); }
+  .sev-high { background: rgba(232,163,61,0.15); color: var(--high); }
+  .sev-medium { background: rgba(79,163,209,0.15); color: var(--med); }
+  .sev-low { background: rgba(95,174,122,0.15); color: var(--low); }
+
+  .status-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); }
+  .status-open .status-dot { background: var(--crit); }
+  .status-in_progress .status-dot { background: var(--high); }
+  .status-resolved .status-dot, .status-closed .status-dot { background: var(--low); }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+  }
+
+  /* ---------- New ticket form ---------- */
+  .new-ticket-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .field-row { display: flex; gap: 12px; }
+  .field-row > div { flex: 1; }
+  textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    min-height: 70px;
+    resize: vertical;
+    margin-bottom: 14px;
+  }
+
+  /* ---------- Ticket detail overlay ---------- */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8,10,13,0.7);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 10;
+  }
+  .detail-panel {
+    width: min(480px, 100%);
+    background: var(--panel);
+    height: 100%;
+    padding: 26px;
+    overflow-y: auto;
+    border-left: 1px solid var(--border);
+  }
+  .detail-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .detail-panel h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin: 4px 0 2px;
+  }
+  .detail-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+  .close-x {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .detail-section { margin-bottom: 20px; }
+  .detail-section h4 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+  .detail-desc {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+  .note {
+    border-left: 2px solid var(--accent-dim);
+    padding: 6px 0 6px 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .note-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+  .status-controls { display: flex; gap: 6px; flex-wrap: wrap; }
+  .status-controls .btn.active { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .ticket-row { grid-template-columns: 1fr; gap: 4px; }
+    .wrap { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== AUTH SCREEN ===================== -->
+<div id="auth-screen">
+  <div class="auth-shell">
+    <h1 id="auth-title">Sign in</h1>
+    <p class="sub">SOC Ticketing Console &mdash; live demo. Register an account to try it out; alerts from the connected Wazuh instance flow in automatically.</p>
+    <div id="auth-error" class="error-msg hidden"></div>
+    <form id="auth-form">
+      <label for="auth-username">Username</label>
+      <input id="auth-username" autocomplete="username" required />
+      <label for="auth-password">Password</label>
+      <input id="auth-password" type="password" autocomplete="current-password" required />
+      <button type="submit" class="btn btn-primary" style="width:100%;" id="auth-submit">Sign in</button>
+    </form>
+    <div class="auth-toggle">
+      <span id="auth-toggle-text">No account yet?</span>
+      <button id="auth-toggle-btn" type="button">Create one</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DASHBOARD ===================== -->
+<div id="dashboard" class="hidden">
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-mark">SOC</span>
+      <span class="brand-name">Ticketing Console</span>
+    </div>
+    <div class="session-info">
+      <span id="whoami"></span>
+      <button class="btn" id="logout-btn">Sign out</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div id="sandbox-banner" class="hidden" style="background:rgba(232,163,61,0.1);border:1px solid var(--accent-dim);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:18px;">
+      You're in the public sandbox — tickets here are sample data, safe to create, edit, and resolve freely. Real alerts from the connected lab stay private to the admin account.
+    </div>
+    <div class="new-ticket-panel">
+      <h4 style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin:0 0 12px;">Got a real problem? File it here.</h4>
+      <p style="font-size:12px;color:var(--text-muted);margin:0 0 14px;">Bring a real workplace issue — a security concern, a broken app, whatever's actually going on. Work through it in the sandbox, and reveal a hint if you get stuck.</p>
+      <div class="field-row">
+        <div>
+          <label for="nt-title">Title</label>
+          <input id="nt-title" placeholder="Short summary" />
+        </div>
+        <div style="flex:0 0 140px;">
+          <label for="nt-category">Category</label>
+          <select id="nt-category">
+            <option value="security">Security</option>
+            <option value="helpdesk">Helpdesk</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div style="flex:0 0 140px;">
+          <label for="nt-severity">Severity</label>
+          <select id="nt-severity">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+      </div>
+      <label for="nt-desc">Description</label>
+      <textarea id="nt-desc" placeholder="What's actually happening?"></textarea>
+      <button class="btn btn-primary" id="nt-submit">Submit ticket</button>
+    </div>
+
+    <div class="board-header">
+      <h2>Open work</h2>
+      <div class="filters">
+        <select id="filter-category">
+          <option value="">All categories</option>
+          <option value="security">Security</option>
+          <option value="helpdesk">Helpdesk</option>
+          <option value="visitor-submitted">Visitor-submitted</option>
+        </select>
+        <select id="filter-status">
+          <option value="">All statuses</option>
+          <option value="open">Open</option>
+          <option value="in_progress">In progress</option>
+          <option value="resolved">Resolved</option>
+          <option value="closed">Closed</option>
+        </select>
+        <select id="filter-severity">
+          <option value="">All severities</option>
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="ticket-list"></div>
+  </div>
+</div>
+
+<!-- ===================== TICKET DETAIL OVERLAY ===================== -->
+<div id="detail-overlay" class="overlay hidden">
+  <div class="detail-panel">
+    <div class="detail-top">
+      <div>
+        <span class="ticket-id" id="d-id"></span>
+        <h3 id="d-title"></h3>
+      </div>
+      <button class="close-x" id="d-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="detail-meta" id="d-meta"></div>
+
+    <div class="detail-section">
+      <h4>Status</h4>
+      <div class="status-controls" id="d-status-controls"></div>
+    </div>
+
+    <div class="detail-section">
+      <h4>Description</h4>
+      <div class="detail-desc" id="d-desc"></div>
+    </div>
+
+    <div class="detail-section" id="d-hint-section">
+      <h4>Stuck?</h4>
+      <div id="d-hint-visitor-view">
+        <button class="btn" id="d-hint-reveal">Show hint</button>
+        <div class="detail-desc hidden" id="d-hint-text" style="margin-top:10px;color:var(--accent);"></div>
+        <div class="detail-meta hidden" id="d-hint-none">No hint has been added for this ticket yet.</div>
+      </div>
+      <div class="hidden" id="d-hint-admin-view">
+        <textarea id="d-hint-input" placeholder="Write a hint to help visitors work through this..."></textarea>
+        <button class="btn" id="d-hint-save">Save hint</button>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h4>Notes</h4>
+      <div id="d-notes"></div>
+      <textarea id="d-note-input" placeholder="Add a note..." style="margin-top:8px;"></textarea>
+      <button class="btn" id="d-note-submit">Add note</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Point this at your deployed Render backend URL, e.g.
+  // "https://soc-ticketing-api.onrender.com"
+  const API_BASE = window.API_BASE || "http://127.0.0.1:8000";
+
+  let token = localStorage.getItem("soc_token") || null;
+  let currentUsername = localStorage.getItem("soc_username") || null;
+  let currentRole = null;
+  let isRegisterMode = false;
+  let activeTicketId = null;
+  let currentFilters = { status: "", severity: "", category: "" };
+
+  const $ = (id) => document.getElementById(id);
+
+  function authHeaders() {
+    return token ? { "Authorization": `Bearer ${token}` } : {};
+  }
+
+  async function api(path, opts = {}) {
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...opts,
+      headers: { ...(opts.headers || {}), ...authHeaders() },
+    });
+    if (res.status === 401) {
+      signOut();
+      throw new Error("Session expired, please sign in again");
+    }
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.detail || `Request failed (${res.status})`);
+    }
+    return res.status === 204 ? null : res.json();
+  }
+
+  function showAuthError(msg) {
+    const el = $("auth-error");
+    el.textContent = msg;
+    el.classList.remove("hidden");
+  }
+
+  function signOut() {
+    token = null;
+    currentUsername = null;
+    localStorage.removeItem("soc_token");
+    localStorage.removeItem("soc_username");
+    $("dashboard").classList.add("hidden");
+    $("auth-screen").classList.remove("hidden");
+  }
+
+  async function enterDashboard() {
+    $("auth-screen").classList.add("hidden");
+    $("dashboard").classList.remove("hidden");
+    $("whoami").textContent = currentUsername || "";
+    try {
+      const me = await api("/auth/me");
+      currentRole = me.role;
+      $("sandbox-banner").classList.toggle("hidden", me.role === "admin");
+    } catch (err) {
+      // if this fails, fail open to showing the sandbox notice — safer default
+      $("sandbox-banner").classList.remove("hidden");
+    }
+    loadTickets();
+  }
+
+  // ---------- Auth ----------
+  $("auth-toggle-btn").addEventListener("click", () => {
+    isRegisterMode = !isRegisterMode;
+    $("auth-title").textContent = isRegisterMode ? "Create account" : "Sign in";
+    $("auth-submit").textContent = isRegisterMode ? "Create account" : "Sign in";
+    $("auth-toggle-text").textContent = isRegisterMode ? "Already have an account?" : "No account yet?";
+    $("auth-toggle-btn").textContent = isRegisterMode ? "Sign in" : "Create one";
+    $("auth-error").classList.add("hidden");
+  });
+
+  $("auth-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("auth-error").classList.add("hidden");
+    const username = $("auth-username").value.trim();
+    const password = $("auth-password").value;
+
+    try {
+      if (isRegisterMode) {
+        await api("/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+      }
+      const form = new URLSearchParams();
+      form.set("username", username);
+      form.set("password", password);
+      const loginRes = await fetch(`${API_BASE}/auth/token`, { method: "POST", body: form });
+      if (!loginRes.ok) {
+        const b = await loginRes.json().catch(() => ({}));
+        throw new Error(b.detail || "Sign-in failed");
+      }
+      const data = await loginRes.json();
+      token = data.access_token;
+      currentUsername = username;
+      localStorage.setItem("soc_token", token);
+      localStorage.setItem("soc_username", username);
+      enterDashboard();
+    } catch (err) {
+      showAuthError(err.message);
+    }
+  });
+
+  $("logout-btn").addEventListener("click", signOut);
+
+  // ---------- Ticket list ----------
+  function severityLabel(sev) {
+    return sev.charAt(0).toUpperCase() + sev.slice(1);
+  }
+  function statusLabel(status) {
+    return status.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+  function fmtTime(iso) {
+    const d = new Date(iso);
+    return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  }
+
+  async function loadTickets() {
+    const list = $("ticket-list");
+    list.innerHTML = `<div class="empty-state">Loading tickets&hellip;</div>`;
+    try {
+      const params = new URLSearchParams();
+      if (currentFilters.status) params.set("status", currentFilters.status);
+      if (currentFilters.severity) params.set("severity", currentFilters.severity);
+      if (currentFilters.category) params.set("category", currentFilters.category);
+      const qs = params.toString() ? `?${params}` : "";
+      const tickets = await api(`/tickets/${qs}`);
+
+      if (!tickets.length) {
+        list.innerHTML = `<div class="empty-state">No tickets match these filters. File one above, or wait for the next Wazuh alert.</div>`;
+        return;
+      }
+
+      list.innerHTML = "";
+      tickets.forEach((t) => {
+        const row = document.createElement("div");
+        row.className = "ticket-row";
+        row.tabIndex = 0;
+        row.innerHTML = `
+          <span class="ticket-id">TKT-${String(t.id).padStart(4, "0")}</span>
+          <div>
+            <div class="ticket-title">${escapeHtml(t.title)}</div>
+            <div class="ticket-source">${t.category ? escapeHtml(t.category) + " \u00b7 " : ""}${t.source} &middot; ${fmtTime(t.created_at)}</div>
+          </div>
+          <span class="pill sev-${t.severity}">${severityLabel(t.severity)}</span>
+          <span class="status-tag status-${t.status}"><span class="status-dot"></span>${statusLabel(t.status)}</span>
+          <span></span>
+        `;
+        row.addEventListener("click", () => openDetail(t.id));
+        row.addEventListener("keypress", (e) => { if (e.key === "Enter") openDetail(t.id); });
+        list.appendChild(row);
+      });
+    } catch (err) {
+      list.innerHTML = `<div class="empty-state">${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  $("filter-category").addEventListener("change", (e) => {
+    currentFilters.category = e.target.value;
+    loadTickets();
+  });
+  $("filter-status").addEventListener("change", (e) => {
+    currentFilters.status = e.target.value;
+    loadTickets();
+  });
+  $("filter-severity").addEventListener("change", (e) => {
+    currentFilters.severity = e.target.value;
+    loadTickets();
+  });
+
+  // ---------- New ticket ----------
+  $("nt-submit").addEventListener("click", async () => {
+    const title = $("nt-title").value.trim();
+    const description = $("nt-desc").value.trim();
+    const severity = $("nt-severity").value;
+    const category = $("nt-category").value;
+    if (!title) return;
+    try {
+      await api("/tickets/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description, severity, category }),
+      });
+      $("nt-title").value = "";
+      $("nt-desc").value = "";
+      loadTickets();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  // ---------- Detail panel ----------
+  const STATUSES = ["open", "in_progress", "resolved", "closed"];
+
+  async function openDetail(id) {
+    activeTicketId = id;
+    try {
+      const t = await api(`/tickets/${id}`);
+      $("d-id").textContent = `TKT-${String(t.id).padStart(4, "0")}`;
+      $("d-title").textContent = t.title;
+      $("d-meta").textContent = `${t.source} source \u00b7 created ${fmtTime(t.created_at)} \u00b7 severity ${t.severity}`;
+      $("d-desc").textContent = t.description || "(no description provided)";
+
+      $("d-status-controls").innerHTML = "";
+      STATUSES.forEach((s) => {
+        const b = document.createElement("button");
+        b.className = "btn" + (s === t.status ? " active" : "");
+        b.textContent = statusLabel(s);
+        b.addEventListener("click", () => updateStatus(id, s));
+        $("d-status-controls").appendChild(b);
+      });
+
+      $("d-notes").innerHTML = t.notes.length
+        ? t.notes.map((n) => `
+            <div class="note">
+              <div class="note-meta">${escapeHtml(n.author)} &middot; ${fmtTime(n.created_at)}</div>
+              ${escapeHtml(n.body)}
+            </div>`).join("")
+        : `<div class="detail-meta">No notes yet.</div>`;
+
+      // Hint section: everyone gets a reveal button, admin also gets an editor.
+      $("d-hint-text").classList.add("hidden");
+      $("d-hint-none").classList.add("hidden");
+      $("d-hint-reveal").classList.remove("hidden");
+      $("d-hint-reveal").textContent = "Show hint";
+      $("d-hint-text").textContent = t.hint || "";
+
+      $("d-hint-admin-view").classList.toggle("hidden", currentRole !== "admin");
+      $("d-hint-input").value = t.hint || "";
+
+      $("detail-overlay").classList.remove("hidden");
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  async function updateStatus(id, status) {
+    try {
+      await api(`/tickets/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+      openDetail(id);
+      loadTickets();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  $("d-hint-reveal").addEventListener("click", () => {
+    if ($("d-hint-text").textContent.trim()) {
+      $("d-hint-text").classList.remove("hidden");
+      $("d-hint-none").classList.add("hidden");
+    } else {
+      $("d-hint-none").classList.remove("hidden");
+      $("d-hint-text").classList.add("hidden");
+    }
+    $("d-hint-reveal").classList.add("hidden");
+  });
+
+  $("d-hint-save").addEventListener("click", async () => {
+    const hint = $("d-hint-input").value.trim();
+    if (!activeTicketId) return;
+    try {
+      await api(`/tickets/${activeTicketId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hint }),
+      });
+      openDetail(activeTicketId);
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  $("d-note-submit").addEventListener("click", async () => {
+    const body = $("d-note-input").value.trim();
+    if (!body || !activeTicketId) return;
+    try {
+      await api(`/tickets/${activeTicketId}/notes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body }),
+      });
+      $("d-note-input").value = "";
+      openDetail(activeTicketId);
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  $("d-close").addEventListener("click", () => $("detail-overlay").classList.add("hidden"));
+
+  // ---------- Boot ----------
+  if (token && currentUsername) {
+    enterDashboard();
+  }
+</script>
+</body>
+</html>
