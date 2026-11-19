@@ -141,6 +141,8 @@ def ask_gemini(news, api_key):
         "Rules (follow exactly):\n"
         "- Choose up to 3 items that matter most to defenders (active exploitation, major breaches, "
         "critical patches, government advisories). Skip marketing, webinars and opinion pieces.\n"
+        "- When stories are similarly important, prefer items from different sources.\n"
+        "- Name organizations (for example CISA) when the item names them; don't make them vaguer.\n"
         "- Use ONLY facts stated in each item's title and summary. Do not add names, numbers, dates, "
         "CVE ids, victims, attribution or details that are not in that item.\n"
         "- If the summary is thin, keep your summary short rather than guessing.\n"
