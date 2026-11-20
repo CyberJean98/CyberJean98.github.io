@@ -10,6 +10,7 @@ Portfolio of **Jean Berrios-Marquez**, an entry-level SOC analyst, U.S. Navy vet
 | --- | --- |
 | [Home](https://cyberjean98.github.io/) | Career path, certifications, featured work, latest threat intel |
 | [Projects](https://cyberjean98.github.io/projects/) | Home SOC lab (Wazuh), SOC ticketing console, Pwnagotchi, SYN flood incident report, threat-intel pipeline, WordPress work |
+| [Web design](https://cyberjean98.github.io/web/) | Services for small businesses, example sites, process and a free quote |
 | [Certifications](https://cyberjean98.github.io/certs/) | Google Cybersecurity Certificate, Forage job simulations, Security+ and TryHackMe progress, with PDFs |
 | [Threat intel](https://cyberjean98.github.io/intel/) | A sourced daily briefing, generated automatically |
 
@@ -35,6 +36,6 @@ Jekyll on GitHub Pages, with custom layouts and CSS (no theme). Fonts: Sora and 
 ## Related
 
 - [Web development portfolio](https://github.com/CyberJean98/web-development-portfolio): concept sites, brand books and WordPress block themes
-- [JAT Site Shield](https://github.com/CptNope/JAT-Site-Shield) and [JAT Shell Scanner](https://github.com/CptNope/JAT-Shell-Scanner): Spanish translation and testing
+- [JAT Site Shield](https://github.com/CptNope/JAT-Site-Shield) and [JAT Shell Scanner](https://github.com/CptNope/JAT-Shell-Scanner): Spanish translations (650+ strings) shipped in versions 1.1.1 and 1.7.1; credited contributor on WordPress.org
 
 Contact: jeanberrios53@gmail.com · [LinkedIn](https://www.linkedin.com/in/jean-berrios-marquez-2617a73b2)

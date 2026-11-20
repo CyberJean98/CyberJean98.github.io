@@ -18,6 +18,7 @@
     <nav class="nav" aria-label="Main">
       <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}>Projects</a>
       <a href="{{ '/certs/' | relative_url }}" {% if page.url == '/certs/' %}aria-current="page"{% endif %}>Certifications</a>
+      <a class="keep" href="{{ '/web/' | relative_url }}" {% if page.url == '/web/' %}aria-current="page"{% endif %}>Web design</a>
       <a href="{{ '/intel/' | relative_url }}" {% if page.url == '/intel/' %}aria-current="page"{% endif %}>Threat intel</a>
       <a href="{{ '/#about' | relative_url }}">About</a>
       <a class="btn" href="mailto:{{ site.email }}">Contact</a>
@@ -31,6 +32,7 @@
   <div class="wrap">
     <span>Jean Berrios-Marquez, Worcester, MA</span>
     <nav aria-label="Elsewhere">
+      <a href="{{ '/web/' | relative_url }}">Hire me for a website</a>
       <a href="{{ site.social.linkedin }}">LinkedIn</a>
       <a href="{{ site.social.github }}">GitHub</a>
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>

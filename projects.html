@@ -62,18 +62,20 @@ intro: Labs, builds and write-ups. Each one lists what I used and links to the c
   </article>
 </div>
 
-<h2 class="group-title">Web and WordPress</h2>
+<h2 class="group-title" id="wordpress">Web and WordPress</h2>
 <div class="projects">
   <article class="project">
-    <div><h3>WordPress security plugins</h3><p class="kind">Open-source contributor, Jeremy Anderson Tech</p><span class="status">Contributing</span></div>
+    <div><h3>WordPress security plugins: Spanish localization</h3><p class="kind">Open-source contributor to Jeremy Anderson Tech</p><span class="status">Shipped in official releases</span></div>
     <div class="body">
-      <p>Spanish translation and functional testing for two free WordPress.org plugins. After translating, I test every feature on a local WordPress VM to confirm nothing broke.</p>
+      <p>Jeremy Anderson, my mentor, asked me to contribute to his company's two free security plugins on WordPress.org. I translated both into Spanish, then tested every feature on a local WordPress VM to make sure nothing broke. Both translations were merged and shipped, and I'm listed as a contributor on both WordPress.org plugin pages.</p>
       <ul class="points">
-        <li><strong>JAT Site Shield:</strong> login lockouts, two-factor codes, core hardening, an activity log with email alerts, and file integrity checks</li>
-        <li><strong>JAT Shell Scanner:</strong> checks whether a site was exposed to, or compromised by, the 2026 PHP2Shell and wp2shell attacks</li>
+        <li><strong><a href="https://github.com/CptNope/JAT-Site-Shield">JAT Site Shield</a></strong> (login lockouts, two-factor codes, core hardening, an activity log with email alerts, file integrity checks): translated more than 360 interface strings, and changed the code so severity labels and relative times like "5 minutes ago" could be translated too. Shipped in version 1.1.1 on Nov 4, 2026; version 1.1.2 added me as a contributor.</li>
+        <li><strong><a href="https://github.com/CptNope/JAT-Shell-Scanner">JAT Shell Scanner</a></strong> (checks whether a site was exposed to, or compromised by, the 2026 PHP2Shell and wp2shell attacks): translated the whole interface, 296 strings, through my own <a href="https://github.com/CptNope/JAT-Shell-Scanner/pull/18">pull request #18</a>. Released in version 1.7.1 on Nov 15, 2026.</li>
       </ul>
-      <ul class="tags"><li>WordPress</li><li>Localization</li><li>QA testing</li><li>Web security</li></ul>
-      <div class="links"><a href="https://github.com/CptNope/JAT-Site-Shield">JAT Site Shield</a><a href="https://github.com/CptNope/JAT-Shell-Scanner">JAT Shell Scanner</a></div>
+      <blockquote class="credit">"Spanish (es_ES) translation of the whole interface (296 strings), by Jean Berrios."<cite>JAT Shell Scanner changelog, version 1.7.1</cite></blockquote>
+      <p><strong>What I learned:</strong> how WordPress localization works (.pot templates, .po and .mo files, text domains), contributing through forks and pull requests, and testing a security tool after changing it, because a translation that breaks a security feature is worse than no translation.</p>
+      <ul class="tags"><li>WordPress</li><li>i18n / localization</li><li>gettext (.po/.mo)</li><li>Git and pull requests</li><li>QA testing</li><li>Web security</li></ul>
+      <div class="links"><a href="https://profiles.wordpress.org/jeanberrios/">My WordPress.org profile</a><a href="https://github.com/CptNope/JAT-Site-Shield/blob/main/CHANGELOG.md">Site Shield changelog</a><a href="https://github.com/CptNope/JAT-Shell-Scanner/blob/main/CHANGELOG.md">Shell Scanner changelog</a></div>
     </div>
   </article>
   <article class="project">
@@ -89,7 +91,7 @@ intro: Labs, builds and write-ups. Each one lists what I used and links to the c
     <div class="body">
       <p>A restaurant, a roofing contractor and a cybersecurity firm, each built through the same process: design system, brand book, hand-built HTML example, then a WordPress block theme tested on a real install.</p>
       <ul class="tags"><li>WordPress</li><li>Block themes</li><li>theme.json</li><li>HTML/CSS</li><li>Accessibility</li></ul>
-      <div class="links"><a href="https://cyberjean98.github.io/web-development-portfolio/">View the sites</a><a href="https://github.com/CyberJean98/web-development-portfolio">Code, brand books and themes</a><a href="{{ '/2026/11/19/building-in-public-this-week.html' | relative_url }}">Write-up</a></div>
+      <div class="links"><a href="{{ '/web/' | relative_url }}">Web design services</a><a href="https://cyberjean98.github.io/web-development-portfolio/">View the sites</a><a href="https://github.com/CyberJean98/web-development-portfolio">Code, brand books and themes</a><a href="{{ '/2026/11/19/building-in-public-this-week.html' | relative_url }}">Write-up</a></div>
     </div>
   </article>
 </div>
