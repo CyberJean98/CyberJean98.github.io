@@ -55,7 +55,7 @@ intro: Labs, builds and write-ups. Each one lists what I used and links to the c
         <li>Stories that don't match a real article, or mention a CVE their source doesn't, are dropped. No real news means no post.</li>
         <li>Runs on GitHub's built-in token with least-privilege permissions, so there's no personal key to expire</li>
       </ul>
-      <p><strong>Lesson learned:</strong> the first version asked an AI for "today's news" without internet access, and it invented stories. I removed all 189 of those posts and rebuilt the pipeline around real sources and validation.</p>
+      <p><strong>Lesson learned:</strong> the first version asked an AI for "today's news" without internet access, and it invented stories. I removed all 189 of those posts and rebuilt the pipeline around real sources and validation. <a href="{{ '/2026/11/19/building-in-public-this-week.html' | relative_url }}">Full write-up</a>.</p>
       <ul class="tags"><li>GitHub Actions</li><li>Python</li><li>Gemini API</li><li>RSS</li><li>CISA KEV</li><li>CI/CD</li></ul>
       <div class="links"><a href="{{ '/intel/' | relative_url }}">Read the briefings</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/blob/main/scripts/daily_intel.py">Pipeline code</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/blob/main/.github/workflows/daily-news.yml">Workflow</a></div>
     </div>
@@ -77,11 +77,19 @@ intro: Labs, builds and write-ups. Each one lists what I used and links to the c
     </div>
   </article>
   <article class="project">
+    <div><h3>Design taste playbook</h3><p class="kind">My process for client web design</p><span class="status">In use</span></div>
+    <div class="body">
+      <p>The decision layer that comes before every build: six style directions, which one fits which kind of client, ten discovery questions that end in a one-line brief, and a taste review checklist to run before a client sees anything. I also turned it into a reusable Claude skill, so every new site starts from the same process.</p>
+      <ul class="tags"><li>Design systems</li><li>Client discovery</li><li>Brand strategy</li><li>Process</li></ul>
+      <div class="links"><a href="https://github.com/CyberJean98/web-development-portfolio/tree/main/playbook">Read the playbook</a><a href="{{ '/2026/11/19/building-in-public-this-week.html' | relative_url }}">Write-up</a></div>
+    </div>
+  </article>
+  <article class="project">
     <div><h3>Web development portfolio</h3><p class="kind">Three concept sites with WordPress block themes</p><span class="status">Completed</span></div>
     <div class="body">
       <p>A restaurant, a roofing contractor and a cybersecurity firm, each built through the same process: design system, brand book, hand-built HTML example, then a WordPress block theme tested on a real install.</p>
       <ul class="tags"><li>WordPress</li><li>Block themes</li><li>theme.json</li><li>HTML/CSS</li><li>Accessibility</li></ul>
-      <div class="links"><a href="https://cyberjean98.github.io/web-development-portfolio/">View the sites</a><a href="https://github.com/CyberJean98/web-development-portfolio">Code, brand books and themes</a></div>
+      <div class="links"><a href="https://cyberjean98.github.io/web-development-portfolio/">View the sites</a><a href="https://github.com/CyberJean98/web-development-portfolio">Code, brand books and themes</a><a href="{{ '/2026/11/19/building-in-public-this-week.html' | relative_url }}">Write-up</a></div>
     </div>
   </article>
 </div>
