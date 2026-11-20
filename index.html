@@ -1,0 +1,173 @@
+---
+layout: default
+title: Jean Berrios-Marquez
+---
+{% assign intel = site.categories['threat-intel'] %}
+{% assign writing = site.posts | where_exp: "p", "p.categories.size == 0" %}
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <h1 id="hero-title">Jean <span class="nowrap">Berrios-Marquez</span></h1>
+      <p class="role">Entry-level SOC analyst. Navy veteran. Builder of secure websites.</p>
+      <p class="lede">I learn security by building it: a Wazuh home SOC, a ticketing system that turns its alerts into tickets, and a daily threat-intel pipeline that only publishes sourced news. Everything here is real work you can open and check.</p>
+      <div class="actions">
+        <a class="btn" href="{{ '/projects/' | relative_url }}">See my projects</a>
+        <a class="btn ghost" href="mailto:{{ site.email }}">Email me</a>
+      </div>
+      <ul class="facts">
+        <li>Worcester, MA</li>
+        <li>English, Spanish, Portuguese</li>
+        <li>Open to SOC and IT security roles</li>
+      </ul>
+    </div>
+    <ol class="route" aria-label="Career path">
+      <li>
+        <span class="when">Service</span>
+        <strong>U.S. Navy</strong>
+        <p>Discipline, procedure and staying calm when things go wrong.</p>
+      </li>
+      <li>
+        <span class="when">8 years</span>
+        <strong>Lead line cook</strong>
+        <p>Running the line at Via Italian Table: prep, priorities and speed under pressure.</p>
+      </li>
+      <li class="now">
+        <span class="when">Now</span>
+        <strong>Cybersecurity</strong>
+        <p>Home SOC lab, certifications and open-source WordPress security work.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="creds-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="creds-title">Certifications</h2>
+      <a class="more" href="{{ '/certs/' | relative_url }}">All certifications and proof</a>
+    </div>
+    <div class="creds">
+      <div class="cred"><span class="state">Completed</span><h3>Google Cybersecurity Certificate</h3><p>Google / Coursera</p></div>
+      <div class="cred"><span class="state">Completed</span><h3>3 cyber job simulations</h3><p>Datacom, Deloitte and Mastercard on Forage</p></div>
+      <div class="cred"><span class="state wip">In progress</span><h3>CompTIA Security+</h3><p>About 60% through study</p><div class="meter" aria-hidden="true"><span style="width:60%"></span></div></div>
+      <div class="cred"><span class="state wip">In progress</span><h3>TryHackMe SOC Level 1</h3><p>About 40% of rooms done</p><div class="meter" aria-hidden="true"><span style="width:40%"></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="work-title">Featured work</h2>
+      <a class="more" href="{{ '/projects/' | relative_url }}">All projects</a>
+    </div>
+    <div class="projects">
+      <article class="project">
+        <div><h3>Home SOC lab</h3><p class="kind">Wazuh SIEM on a Lenovo ThinkCentre M70t</p><span class="status">Running</span></div>
+        <div class="body">
+          <p>A working SIEM on my home network, collecting logs from Ubuntu and Windows endpoints. I use it to practice detection, write rules and investigate real alerts.</p>
+          <ul class="tags"><li>Wazuh</li><li>SIEM</li><li>Ubuntu</li><li>Windows</li><li>Detection rules</li></ul>
+        </div>
+      </article>
+      <article class="project">
+        <div><h3>SOC ticketing console</h3><p class="kind">FastAPI backend, web frontend, Wazuh webhook</p><span class="status wip">In progress</span></div>
+        <div class="body">
+          <p>A ticketing system built from scratch so I understand the full lifecycle: alert, ticket, triage, assignment, resolution and audit trail. Wazuh alerts above a set severity open tickets automatically.</p>
+          <ul class="tags"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>JWT auth</li><li>Wazuh</li></ul>
+          <div class="links"><a href="{{ '/ticketing/' | relative_url }}">Open the console</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/tree/main/ticketing-backend">Backend code</a></div>
+        </div>
+      </article>
+      <article class="project">
+        <div><h3>Daily threat-intel pipeline</h3><p class="kind">This site, automated with GitHub Actions</p><span class="status">Running daily</span></div>
+        <div class="body">
+          <p>Every morning it pulls real stories from CISA, BleepingComputer, The Hacker News, Krebs on Security and SecurityWeek, plus new entries in CISA's exploited-vulnerabilities catalog. Gemini summarizes only those articles, and the code checks every story against its source before anything is published.</p>
+          <ul class="tags"><li>GitHub Actions</li><li>Python</li><li>Gemini API</li><li>CISA KEV</li><li>Jekyll</li></ul>
+          <div class="links"><a href="{{ '/intel/' | relative_url }}">Read the briefings</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/blob/main/scripts/daily_intel.py">Pipeline code</a></div>
+        </div>
+      </article>
+      <article class="project">
+        <div><h3>WordPress security plugins</h3><p class="kind">Open-source contributor, Jeremy Anderson Tech</p><span class="status">Contributing</span></div>
+        <div class="body">
+          <p>Spanish translation and testing for two free WordPress.org security plugins: JAT Site Shield (login lockouts, two-factor codes, hardening) and JAT Shell Scanner (checks for PHP2Shell and wp2shell compromise). I test each feature on a local WordPress VM after translating.</p>
+          <ul class="tags"><li>WordPress</li><li>Localization</li><li>QA testing</li><li>Web security</li></ul>
+          <div class="links"><a href="https://github.com/CptNope/JAT-Site-Shield">JAT Site Shield</a><a href="https://github.com/CptNope/JAT-Shell-Scanner">JAT Shell Scanner</a></div>
+        </div>
+      </article>
+      <article class="project">
+        <div><h3>Secure websites for small businesses</h3><p class="kind">Design systems, brand books and WordPress themes</p><span class="status">Portfolio</span></div>
+        <div class="body">
+          <p>Three concept sites, each built through the full process: design system, brand book, HTML example, then a tested WordPress block theme.</p>
+          <ul class="tags"><li>WordPress</li><li>Block themes</li><li>HTML/CSS</li><li>Accessibility</li></ul>
+          <div class="links"><a href="https://cyberjean98.github.io/web-development-portfolio/">View the web portfolio</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="intel-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="intel-title">Latest threat intel</h2>
+      <a class="more" href="{{ '/intel/' | relative_url }}">All briefings</a>
+    </div>
+    <ul class="post-list">
+      {% for post in intel limit:3 %}
+      <li>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <p>{{ post.excerpt | strip_html | strip | truncate: 160 }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="note">Generated each morning from real news feeds. Every story links to its original source.</p>
+  </div>
+</section>
+
+{% if writing.size > 0 %}
+<section aria-labelledby="writing-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="writing-title">Writing</h2><p>Write-ups and notes from my own work.</p></div>
+    <ul class="post-list">
+      {% for post in writing %}
+      <li>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <p>{{ post.excerpt | strip_html | strip | truncate: 160 }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+<section id="about" aria-labelledby="about-title">
+  <div class="wrap about">
+    <div>
+      <h2 id="about-title">About me</h2>
+      <p>I'm Jean, a U.S. Navy veteran moving into cybersecurity after eight years as a lead line cook in Worcester. A kitchen runs on <em>mise en place</em>: everything prepared before the rush. I bring the same habit to security: tools configured, logs watched, procedures ready before an incident.</p>
+      <p>I'm building in public so you can see how I think, not just what I've studied. I work in English, Spanish and Portuguese, which helps when users and threats don't stick to one language.</p>
+    </div>
+    <div>
+      <h2>People who helped</h2>
+      <ul class="people">
+        <li><strong>Jeremy Anderson</strong><span class="who">Mentor</span><p>Started me on hands-on learning with my first build, the Pwnagotchi, and still meets with me to talk through my development and career.</p></li>
+        <li><strong>Christopher Charity</strong><span class="who">Mentor</span><p>Guides my career growth and connected me with the American Corporate Partners (ACP) mentorship program.</p></li>
+        <li><strong>Noah Sinai</strong><span class="who">ACP mentor</span><p>My mentor through ACP. We set goals together and track them as I work toward my first security role.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="box">
+      <div>
+        <h2 id="contact-title">Hiring for a SOC or IT security role?</h2>
+        <p>I reply within one business day. Questions about a project are welcome too.</p>
+      </div>
+      <a class="btn" href="mailto:{{ site.email }}">Email me</a>
+    </div>
+  </div>
+</section>

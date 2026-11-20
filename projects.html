@@ -1,0 +1,87 @@
+---
+layout: page
+title: Projects
+permalink: /projects/
+intro: Labs, builds and write-ups. Each one lists what I used and links to the code or files where they're public.
+---
+<h2 class="group-title">Security labs and builds</h2>
+<div class="projects">
+  <article class="project">
+    <div><h3>Home SOC lab</h3><p class="kind">Wazuh SIEM on a Lenovo ThinkCentre M70t</p><span class="status">Running</span></div>
+    <div class="body">
+      <p>A functional SIEM monitoring my home network. It collects logs from Ubuntu and Windows endpoints, and I use it to detect threats and write detection rules in a real environment.</p>
+      <ul class="tags"><li>Wazuh</li><li>SIEM</li><li>Ubuntu</li><li>Windows</li><li>Threat detection</li></ul>
+    </div>
+  </article>
+  <article class="project">
+    <div><h3>SOC ticketing console</h3><p class="kind">Built from scratch, lives in this site's repo</p><span class="status wip">In progress</span></div>
+    <div class="body">
+      <p>Most SOC and help-desk roles expect ticketing experience, so I built a system end to end to understand the whole lifecycle: alert, ticket, triage, assignment, resolution and audit trail.</p>
+      <ul class="points">
+        <li>FastAPI backend with SQLAlchemy and JWT authentication, deployed on Render with PostgreSQL</li>
+        <li>Single-page frontend served by GitHub Pages, no build step</li>
+        <li>Wazuh webhook that opens a ticket automatically when an alert crosses a set severity, mapped from the Wazuh rule level</li>
+      </ul>
+      <ul class="tags"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>JWT</li><li>Wazuh</li><li>Render</li></ul>
+      <div class="links"><a href="{{ '/ticketing/' | relative_url }}">Open the console</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/tree/main/ticketing-backend">Backend code and docs</a></div>
+    </div>
+  </article>
+  <article class="project">
+    <div><h3>Pwnagotchi</h3><p class="kind">Raspberry Pi Zero 2 W with a Waveshare e-paper display</p><span class="status wip">Building</span></div>
+    <div class="body">
+      <p>My first hardware security project, started with my mentor Jeremy Anderson. I built it to learn how WPA handshakes and deauthentication work, on equipment I own and networks I'm authorized to test.</p>
+      <ul class="tags"><li>Raspberry Pi</li><li>Wi-Fi security</li><li>WPA</li><li>Hardware</li><li>Python</li></ul>
+    </div>
+  </article>
+  <article class="project">
+    <div><h3>SYN flood incident response report</h3><p class="kind">Google Cybersecurity Certificate, network analysis lab</p><span class="status">Completed</span></div>
+    <div class="body">
+      <p>Analyzed a SYN flood denial-of-service attack in Wireshark TCP logs. I traced over 150 incomplete handshake requests from one IP (203.0.113.0) within seconds, overwhelming the web server on port 443, and wrote a full incident report covering the attack vector, business impact and mitigations.</p>
+      <ul class="tags"><li>Wireshark</li><li>TCP/IP</li><li>DoS</li><li>Incident response</li></ul>
+      <div class="links"><a href="{{ '/assets/projects/syn-flood-incident-report.pdf' | relative_url }}">Incident report (PDF)</a><a href="{{ '/assets/projects/wireshark-tcp-log.pdf' | relative_url }}">Wireshark log (PDF)</a><a href="{{ '/2026/04/03/syn-flood-incident-response.html' | relative_url }}">Write-up</a></div>
+    </div>
+  </article>
+</div>
+
+<h2 class="group-title">Automation</h2>
+<div class="projects">
+  <article class="project">
+    <div><h3>Daily threat-intel pipeline</h3><p class="kind">GitHub Actions, Python, Gemini API</p><span class="status">Running daily</span></div>
+    <div class="body">
+      <p>Publishes a sourced threat briefing to this site every morning with no manual work.</p>
+      <ul class="points">
+        <li>Pulls the last 30 hours from CISA, BleepingComputer, The Hacker News, Krebs on Security and SecurityWeek, plus new entries in CISA's Known Exploited Vulnerabilities catalog</li>
+        <li>Gemini picks and summarizes up to three stories using only those articles; the code writes every source link itself</li>
+        <li>Stories that don't match a real article, or mention a CVE their source doesn't, are dropped. No real news means no post.</li>
+        <li>Runs on GitHub's built-in token with least-privilege permissions, so there's no personal key to expire</li>
+      </ul>
+      <p><strong>Lesson learned:</strong> the first version asked an AI for "today's news" without internet access, and it invented stories. I removed all 189 of those posts and rebuilt the pipeline around real sources and validation.</p>
+      <ul class="tags"><li>GitHub Actions</li><li>Python</li><li>Gemini API</li><li>RSS</li><li>CISA KEV</li><li>CI/CD</li></ul>
+      <div class="links"><a href="{{ '/intel/' | relative_url }}">Read the briefings</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/blob/main/scripts/daily_intel.py">Pipeline code</a><a href="https://github.com/CyberJean98/CyberJean98.github.io/blob/main/.github/workflows/daily-news.yml">Workflow</a></div>
+    </div>
+  </article>
+</div>
+
+<h2 class="group-title">Web and WordPress</h2>
+<div class="projects">
+  <article class="project">
+    <div><h3>WordPress security plugins</h3><p class="kind">Open-source contributor, Jeremy Anderson Tech</p><span class="status">Contributing</span></div>
+    <div class="body">
+      <p>Spanish translation and functional testing for two free WordPress.org plugins. After translating, I test every feature on a local WordPress VM to confirm nothing broke.</p>
+      <ul class="points">
+        <li><strong>JAT Site Shield:</strong> login lockouts, two-factor codes, core hardening, an activity log with email alerts, and file integrity checks</li>
+        <li><strong>JAT Shell Scanner:</strong> checks whether a site was exposed to, or compromised by, the 2026 PHP2Shell and wp2shell attacks</li>
+      </ul>
+      <ul class="tags"><li>WordPress</li><li>Localization</li><li>QA testing</li><li>Web security</li></ul>
+      <div class="links"><a href="https://github.com/CptNope/JAT-Site-Shield">JAT Site Shield</a><a href="https://github.com/CptNope/JAT-Shell-Scanner">JAT Shell Scanner</a></div>
+    </div>
+  </article>
+  <article class="project">
+    <div><h3>Web development portfolio</h3><p class="kind">Three concept sites with WordPress block themes</p><span class="status">Completed</span></div>
+    <div class="body">
+      <p>A restaurant, a roofing contractor and a cybersecurity firm, each built through the same process: design system, brand book, hand-built HTML example, then a WordPress block theme tested on a real install.</p>
+      <ul class="tags"><li>WordPress</li><li>Block themes</li><li>theme.json</li><li>HTML/CSS</li><li>Accessibility</li></ul>
+      <div class="links"><a href="https://cyberjean98.github.io/web-development-portfolio/">View the sites</a><a href="https://github.com/CyberJean98/web-development-portfolio">Code, brand books and themes</a></div>
+    </div>
+  </article>
+</div>

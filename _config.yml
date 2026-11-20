@@ -1,0 +1,42 @@
+title: Jean Berrios-Marquez
+tagline: Entry-level SOC analyst and secure web builder
+description: >-
+  Cybersecurity portfolio of Jean Berrios-Marquez: a Wazuh home SOC lab, a SOC ticketing
+  system, a sourced daily threat-intel pipeline, certifications, and secure websites.
+  Navy veteran in Worcester, MA. English, Spanish and Portuguese.
+author: Jean Berrios-Marquez
+email: jeanberrios53@gmail.com
+url: "https://cyberjean98.github.io"
+baseurl: ""
+timezone: America/New_York
+future: false
+lang: en_US
+
+social:
+  github: https://github.com/CyberJean98
+  linkedin: https://www.linkedin.com/in/jean-berrios-marquez-2617a73b2
+  discussions: https://github.com/CyberJean98/CyberJean.github.io/discussions
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - render.yaml
+  - scripts/
+  - ticketing-backend/
+  - vendor/

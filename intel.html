@@ -1,0 +1,21 @@
+---
+layout: page
+title: Daily threat intel
+permalink: /intel/
+intro: A short briefing every morning, built automatically from real security news. Each story links to its original source, and confirmed-exploited vulnerabilities come straight from CISA's catalog.
+---
+{% assign intel = site.categories['threat-intel'] %}
+{% if intel.size > 0 %}
+<ul class="post-list">
+  {% for post in intel %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <p>{{ post.excerpt | strip_html | strip | truncate: 180 }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>The first briefing will appear here tomorrow morning.</p>
+{% endif %}
+<p class="note">How it works: the pipeline reads feeds from CISA, BleepingComputer, The Hacker News, Krebs on Security and SecurityWeek. Gemini summarizes only those articles, and anything that can't be matched to a real source is dropped. <a href="https://github.com/CyberJean98/CyberJean98.github.io/blob/main/scripts/daily_intel.py">See the code</a>.</p>

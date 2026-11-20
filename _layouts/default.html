@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+{% feed_meta %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="{{ '/' | relative_url }}">Jean Berrios-Marquez<span>.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}>Projects</a>
+      <a href="{{ '/certs/' | relative_url }}" {% if page.url == '/certs/' %}aria-current="page"{% endif %}>Certifications</a>
+      <a href="{{ '/intel/' | relative_url }}" {% if page.url == '/intel/' %}aria-current="page"{% endif %}>Threat intel</a>
+      <a href="{{ '/#about' | relative_url }}">About</a>
+      <a class="btn" href="mailto:{{ site.email }}">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+{{ content }}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Jean Berrios-Marquez, Worcester, MA</span>
+    <nav aria-label="Elsewhere">
+      <a href="{{ site.social.linkedin }}">LinkedIn</a>
+      <a href="{{ site.social.github }}">GitHub</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
