@@ -205,3 +205,6 @@ section + section { border-top: 1px solid var(--line); }
 .client-line { margin: 22px 0 0; color: var(--muted); font-size: 0.97rem; }
 .nav a { white-space: nowrap; }
 @media (max-width: 480px) { .nav .btn { display: none; } .nav a.keep { color: var(--mint); font-weight: 600; } .brand { font-size: 1rem; white-space: nowrap; } }
+
+.cta-pair { display: flex; gap: 12px; flex-wrap: wrap; }
+.booking-note { font-size: 0.88rem; margin-top: 10px !important; }
