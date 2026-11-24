@@ -1,0 +1,48 @@
+---
+layout: default
+title: Contact
+permalink: /contact/
+description: Email Jean Berrios-Marquez, or connect on LinkedIn and GitHub. Open to SOC and IT security roles and to small-business website projects.
+---
+<section class="page-head contact-head" aria-labelledby="contact-page-title">
+  <div class="wrap">
+    <h1 id="contact-page-title">Let's talk</h1>
+    <p>Hiring for a SOC or IT security role, or need a website for your business? Email me, and I reply within one business day. You can also see my work on GitHub and connect on LinkedIn.</p>
+  </div>
+</section>
+
+<section class="page-body" aria-label="Ways to reach me">
+  <div class="wrap">
+    <div class="reach">
+      <a class="reach-card primary" href="mailto:{{ site.email }}?subject=Hello%20Jean">
+        <span class="reach-label">Email</span>
+        <strong class="email">{{ site.email | replace: '@', '@<wbr>' }}</strong>
+        <span class="reach-cta">Write to me</span>
+      </a>
+      <a class="reach-card" href="{{ site.social.linkedin }}" rel="me">
+        <span class="reach-label">LinkedIn</span>
+        <strong>Jean Berrios-Marquez</strong>
+        <span class="reach-cta">Connect on LinkedIn</span>
+      </a>
+      <a class="reach-card" href="{{ site.social.github }}" rel="me">
+        <span class="reach-label">GitHub</span>
+        <strong>CyberJean98</strong>
+        <span class="reach-cta">See my code and projects</span>
+      </a>
+    </div>
+
+    <div class="reach-more">
+      <div>
+        <h2>Need a website?</h2>
+        <p>Book a free 30-minute video call at a time that works for you. Booking is handled by Google Calendar.</p>
+        <a class="btn" href="https://calendar.app.google/3RpfjjBWRSd9tBPr6">Book a free consultation</a>
+      </div>
+      <div>
+        <h2>Hiring?</h2>
+        <p>Start with my projects and certifications, then email me. I'm open to SOC analyst and IT security roles in Central Massachusetts or remote.</p>
+        <a class="btn ghost" href="{{ '/projects/' | relative_url }}">See my projects</a>
+      </div>
+    </div>
+    <p class="note">Based in Worcester, MA. I work in English, Spanish and Portuguese.</p>
+  </div>
+</section>

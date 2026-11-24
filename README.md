@@ -38,4 +38,4 @@ Jekyll on GitHub Pages, with custom layouts and CSS (no theme). Fonts: Sora and 
 - [Web development portfolio](https://github.com/CyberJean98/web-development-portfolio): concept sites, brand books and WordPress block themes
 - [JAT Site Shield](https://github.com/CptNope/JAT-Site-Shield) and [JAT Shell Scanner](https://github.com/CptNope/JAT-Shell-Scanner): Spanish translations (650+ strings) shipped in versions 1.1.1 and 1.7.1; credited contributor on WordPress.org
 
-Contact: jeanberrios53@gmail.com · [LinkedIn](https://www.linkedin.com/in/jean-berrios-marquez-2617a73b2)
+Contact: [jean.berrios@jeremyanderson.tech](mailto:jean.berrios@jeremyanderson.tech) · [LinkedIn](https://www.linkedin.com/in/jean-berrios-marquez-2617a73b2) · [GitHub](https://github.com/CyberJean98) · [Contact page](https://cyberjean98.github.io/contact/)

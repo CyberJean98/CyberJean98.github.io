@@ -21,7 +21,7 @@
       <a class="keep" href="{{ '/web/' | relative_url }}" {% if page.url == '/web/' %}aria-current="page"{% endif %}>Web design</a>
       <a href="{{ '/intel/' | relative_url }}" {% if page.url == '/intel/' %}aria-current="page"{% endif %}>Threat intel</a>
       <a href="{{ '/#about' | relative_url }}">About</a>
-      <a class="btn" href="mailto:{{ site.email }}">Contact</a>
+      <a class="btn" href="{{ '/contact/' | relative_url }}" {% if page.url == '/contact/' %}aria-current="page"{% endif %}>Contact</a>
     </nav>
   </div>
 </header>

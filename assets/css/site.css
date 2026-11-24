@@ -208,3 +208,19 @@ section + section { border-top: 1px solid var(--line); }
 
 .cta-pair { display: flex; gap: 12px; flex-wrap: wrap; }
 .booking-note { font-size: 0.88rem; margin-top: 10px !important; }
+
+/* Contact page */
+.reach { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.reach-card { display: flex; flex-direction: column; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; text-decoration: none; color: var(--text); transition: border-color .15s ease, transform .15s ease; }
+.reach-card:hover { border-color: var(--mint); color: var(--text); transform: translateY(-2px); }
+.reach-card.primary { border-color: var(--mint); background: linear-gradient(180deg, rgba(111,214,168,.10), var(--surface)); }
+.reach-label { font-size: .85rem; color: var(--muted); font-weight: 600; }
+.reach-card strong { font-family: var(--head); font-weight: 600; font-size: 1.1rem; overflow-wrap: anywhere; }
+.reach-cta { color: var(--mint); font-weight: 600; font-size: .95rem; margin-top: 6px; }
+.reach-more { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.reach-more > div { border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.reach-more h2 { font-size: 1.25rem; margin-bottom: 8px; }
+.reach-more p { color: var(--muted); }
+@media (max-width: 860px) { .reach { grid-template-columns: 1fr; } .reach-more { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .reach-card { transition: none; } .reach-card:hover { transform: none; } }
+.reach-card strong.email { font-size: 1.02rem; overflow-wrap: normal; }
